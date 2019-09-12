@@ -1,0 +1,35 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: #1b579a;
+}
+
+#app{
+    min-height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding-bottom: 0;
+    background-color: #ececec;
+}
+
+#main{
+    position: absolute;
+    float: left;
+    left: 240px;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    z-index: 998;
+    width: auto;
+    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 20px 10px;
+    background: #f3f3f3;
+}
+
+
+
