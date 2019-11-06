@@ -45,8 +45,6 @@ const data = [
 
 export default class Home extends Component {
 
-    mixins: [Form.ValueMixin]
-
     constructor(props) {
         super(props);
         this.state = {
