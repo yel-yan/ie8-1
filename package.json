@@ -62,7 +62,7 @@
     "axios": "^0.16.2",
     "babel-polyfill": "6.26.0",
     "echarts": "4.2.1",
-    "es3ify-webpack-plugin": "^0.0.1",
+    "es3ify-webpack-plugin": "^0.1.0",
     "es5-shim": "^4.5.9",
     "es6-promise": "4.1.1",
     "export-from-ie8": "^1.0.5",

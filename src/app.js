@@ -6,6 +6,8 @@ import {
     Switch
 } from 'react-router-dom';
 import {notification} from 'antd';
+require('es5-shim');
+require('es5-shim/es5-sham');
 
 import history from "./utils/history";
 import Main from "./main";
@@ -20,6 +22,4 @@ const App = () =>
         <Route path='/password-change' exact component={PasswordChange}/>
         <Route path='/' component={Main}/>
     </Switch>
-
-
 export default App;

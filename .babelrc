@@ -5,12 +5,13 @@
     "stage-0"
   ],
   "plugins": [
-    "transform-runtime",
-    [
-      "import",
-      {
-        "libraryName": "antd"
-      }
-    ]
+    "transform-runtime"
+    // 开启后ie8 日期选择器报getComputedStyle 方法兼容未定义问题，这个注释主要做antd按需加载
+    // [
+    //   "import",
+    //   {
+    //     "libraryName": "antd"
+    //   }
+    // ]
   ]
 }
