@@ -26,22 +26,18 @@ const publicConfig = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new UglifyJSPlugin({
-            sourceMap: false,
-            uglifyOptions: {
-                ie8: true,
-                output: {
-                    comments: false,
-                    beautify: false,
-                },
-                compress: {
-                    warnings: false,
-                    drop_debugger:true,
-                    drop_console:true,
-                    pure_funcs:['console.log'],
-                    properties: false
-                },
+            compress: {
+                properties: false,
+                warnings: false
             },
-            cache: true,
+            output: {
+                beautify: true,
+                quote_keys: true
+            },
+            mangle: {
+                screw_ie8: false
+            },
+            sourceMap: false
         }),
         new webpack.DefinePlugin({
             'process.env': {
