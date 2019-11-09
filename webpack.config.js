@@ -25,20 +25,36 @@ const publicConfig = {
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
-        new UglifyJSPlugin({
-            compress: {
-                properties: false,
-                warnings: false
-            },
-            output: {
-                beautify: true,
-                quote_keys: true
-            },
-            mangle: {
-                screw_ie8: false
-            },
-            sourceMap: false
-        }),
+        new UglifyJSPlugin(
+            {
+                mangle: {
+                    screw_ie8: false
+                },
+                mangleProperties: {
+                    screw_ie8: false,
+                },
+                compress: {
+                    screw_ie8: false,
+                },
+                output: {
+                    screw_ie8: false
+                }
+            }
+            // {
+            // compress: {
+            //     properties: false,
+            //     warnings: false
+            // },
+            // output: {
+            //     beautify: true,
+            //     quote_keys: true
+            // },
+            // mangle: {
+            //     screw_ie8: false
+            // },
+            // sourceMap: false
+            // }
+        ),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
