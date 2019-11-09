@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import {Col, Row, Form, Input, Button, Modal, notification, Icon, Message} from 'antd';
+import {Col, Row, Form,form, Input, Button, Modal, notification, Icon,message} from 'antd';
 import Cookies from 'js-cookie';
 import myAxios from '../../utils/myAxios'
-
+import { login } from '../../utils/xhr'
 const FormItem = Form.Item;
 const createForm = Form.create;
 import "./LoginForm.css"
@@ -95,7 +95,7 @@ class LoginForm extends Component {
                 "message": "认证通过"
             };
             //模拟登录成功的处理
-            Message.success('登录成功！');
+            message.success('登录成功！');
             // 认证成功，转向index。要设置Cookie，证明非CSRF攻击
             Cookies.set('_isAuthorised', true);
 
@@ -119,7 +119,10 @@ class LoginForm extends Component {
                     })
                 }
             }
-            this.props.onSubmitSuccess();
+            // login().then(() => {
+                this.props.onSubmitSuccess();
+            // })
+            
         })
     }
 
@@ -174,7 +177,7 @@ class LoginForm extends Component {
         return (
             <div className='login-box'>
                 <div className='login-card-content'>
-                    <Form horizontal form={this.props.form}>
+                    <Form horizontal>
                         <FormItem>
                             <span className="login-box-title">登&nbsp;&nbsp;&nbsp;&nbsp;录</span>
                         </FormItem>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from "react-router-dom";
+import {Link, withRouter,NavLink} from "react-router-dom";
 import {Menu, Icon} from 'antd';
 import Cookies from 'js-cookie';
 import history from '../../utils/history';
@@ -46,15 +46,15 @@ class Sider extends Component {
                     theme="dark"
                 >
                     <Menu.Item key="8">
-                        <Link to="/">首页</Link>
+                        <NavLink to="/app">首页</NavLink>
                     </Menu.Item>
                     <SubMenu key="sub1" title={<span><Icon type="mail" /><span>工作台</span></span>}>
-                        <Menu.Item key="9"><Link to="/Uncheck">待审批</Link></Menu.Item>
-                        <Menu.Item key="10"><Link to="/approve">审批管理</Link></Menu.Item>
-                        <Menu.Item key="11"><Link to="/docsign">公文签批</Link></Menu.Item>
-                        <Menu.Item key="12"><Link to="/schedule">日程管理</Link></Menu.Item>
-                        <Menu.Item key="13"><Link to="/news">新闻资讯</Link></Menu.Item>
-                        <Menu.Item key="14"><Link to="/inbox">测试</Link></Menu.Item>
+                        <Menu.Item key="9"><NavLink to="/app/uncheck">待审批</NavLink></Menu.Item>
+                        <Menu.Item key="10"><NavLink to="/app/approve" activeClassName="active">审批管理</NavLink></Menu.Item>
+                        <Menu.Item key="11"><NavLink to="/app/docsign" activeClassName="active">公文签批</NavLink></Menu.Item>
+                        <Menu.Item key="12"><NavLink to="/app/schedule" activeClassName="active">日程管理</NavLink></Menu.Item>
+                        <Menu.Item key="13"><NavLink to="/app/news" activeClassName="active">新闻资讯</NavLink></Menu.Item>
+                        <Menu.Item key="14"><NavLink to="/app/inbox" activeClassName="active">测试</NavLink></Menu.Item>
                     </SubMenu>
                 </Menu>
             </div>

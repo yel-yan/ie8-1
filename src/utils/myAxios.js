@@ -8,7 +8,7 @@ const myAxios = axios.create({
     timeout: 10000,
     headers: {'X-Requested-With': 'XMLHttpRequest'},
     // headers: {'Content-Type': 'application/json;charset=utf-8'},
-    // headers: {'Content-Type': 'application/x-www-form-urlencode;charset=utf-8'},
+    headers: {'Content-Type': 'application/x-www-form-urlencode;charset=utf-8'},
 });
 
 myAxios.interceptors.request.use(config => {

@@ -1,8 +1,9 @@
 import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk'
+import { createLogger } from 'redux-logger'
 import combineReducers from './reducers.js';
+// const loggerMiddleware = createLogger()
 
-import promiseMiddleware from './middleware/promiseMiddleware'
-
-let store = createStore(combineReducers, applyMiddleware(promiseMiddleware));
+let store = createStore(combineReducers, applyMiddleware(thunk));
 
 export default store;

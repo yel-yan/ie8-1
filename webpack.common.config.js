@@ -17,7 +17,8 @@ commonConfig = {
             'react',
             'react-dom',
             'react-redux',
-            'react-router-dom'
+            'react-router-dom',
+            'redux-logger'
         ],
     },
     output: {
@@ -71,12 +72,12 @@ commonConfig = {
         //     name: 'runtime',
         //     minChunks: Infinity,
         // }),
-        // new CopyWebpackPlugin([
-        //     {
-        //         from: "src/assets/static",
-        //         to: "assets/static",
-        //     }
-        // ]),
+        new CopyWebpackPlugin([
+            {
+                from: "src/assets/static",
+                to: "assets/static",
+            }
+        ]),
         new es3ifyPlugin()
     ],
 

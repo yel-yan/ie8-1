@@ -11,15 +11,13 @@ class Login extends React.Component {
     }
 
     loginSuccess() {
-        this.props.history.push('/home');
+        this.props.history.push('/app');
         console.log("登录成功跳转main")
     }
 
     render() {
         return (
             <div className='login-main'>
-                {/*<img src="./assets/static/login/logo.png" className="login-logo"/>*/}
-                {/*<img src="./assets/static-img/login/halo.png" className="login-halo"/>*/}
                 <div className="login-wrapper">
                     <div className="login-form-wrapper">
                         <LoginForm history={this.props.history} onSubmitSuccess={this.loginSuccess.bind(this)}/>

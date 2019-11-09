@@ -116,7 +116,7 @@ export default class Home extends Component {
                             <div style={{ height: 'auto' }}>
                                 <div className="card">
                                     <div className="card-header">
-                                        <i></i> 公告动态
+                                        <i></i> 公告动态2233445566
                                     </div>
                                     {
                                         [1,2,3,4,5,6].map((item,index)=>{

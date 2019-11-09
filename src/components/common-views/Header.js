@@ -1,8 +1,10 @@
 import React, {Component} from "react";
 import {Menu, Dropdown, Icon} from 'antd';
 import {Link, withRouter} from "react-router-dom";
+import { connect } from 'react-redux'
 import Cookies from 'js-cookie';
 import myAxios from '../../utils/myAxios'
+import { logout } from '../../utils/xhr'
 import "./Header.css"
 
 class Header extends Component {
@@ -10,6 +12,12 @@ class Header extends Component {
         super(props);
         this.state = {};
     };
+
+    logout = () => {
+        logout().then(() => {
+            this.props.history.push('/')
+        })
+    }
 
     render() {
         console.log('header render');
@@ -19,7 +27,7 @@ class Header extends Component {
                     <ul className="nav-right">
                         <li className="nav-item"><Link to='/'><Icon type="link" />严尔林</Link></li>
                         <li className="nav-item"><Link to='/'><Icon type="link" />通知</Link></li>
-                        <li className="nav-item"><Link to='/'><Icon type="link" />退出</Link></li>
+                        <li className="nav-item"><a onClick={this.logout}><Icon type="link" />退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -27,4 +35,5 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default withRouter(Header);
+

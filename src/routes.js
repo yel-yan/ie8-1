@@ -2,21 +2,11 @@ import React from "react";
 import {Spin} from "antd";
 
 import Home from "bundle-loader?lazy&name=home!pages/Home/Home";
-import UnCheck from "bundle-loader?lazy&name=home!pages/UnCheck/UnCheck";
-import Approve from "bundle-loader?lazy&name=home!pages/Approve/Approve";
-import DocSign from "bundle-loader?lazy&name=home!pages/DocSign/DocSign";
-import News from "bundle-loader?lazy&name=home!pages/News/News";
-import Schedule from "bundle-loader?lazy&name=home!pages/Schedule/Schedule";
-
-//demo页
-import DemoPage from "bundle-loader?lazy&name=antd-demos!pages/Page1/Page1";
-import DemoSelect from "bundle-loader?lazy&name=demo-select!pages/UnCheck/UnCheck";
-
-
-//doc页
-import DocPage from "bundle-loader?lazy&name=docs!pages/UserInfo/UserInfo";
-import DocReact from "bundle-loader?lazy&name=doc-react!pages/NotFound/NotFound";
-
+import UnCheck from "bundle-loader?lazy&name=unCheck!pages/UnCheck/UnCheck";
+import Approve from "bundle-loader?lazy&name=approve!pages/Approve/Approve";
+import DocSign from "bundle-loader?lazy&name=docSign!pages/DocSign/DocSign";
+import News from "bundle-loader?lazy&name=news!pages/News/News";
+import Schedule from "bundle-loader?lazy&name=schedule!pages/Schedule/Schedule";
 
 import {bundle} from "./components/common-tools/Bundle";
 
@@ -28,14 +18,6 @@ const ApprovePageBundle = bundle(Empty, Approve, {type: "callback"});
 const DocSignPageBundle = bundle(Empty, DocSign, {type: "callback"});
 const NewsPageBundle = bundle(Empty, News, {type: "callback"});
 const SchedulePageBundle = bundle(Empty, Schedule, {type: "callback"});
-
-//demo页
-const DemoPageBundle = bundle(Empty, DemoPage, {type: "callback"});
-const DemoSelectBundle = bundle(Empty, DemoSelect, {type: "callback"});
-
-//doc页
-const DocPageBundle = bundle(Empty, DocPage, {type: "callback"});
-const DocReactBundle = bundle(Empty, DocReact, {type: "callback"});
 
 const routes = [
     { type: "redirect", exact: true, strict: true, from: "/", to: "/home" },

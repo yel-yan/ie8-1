@@ -1,14 +1,15 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
 import Bundle from './Bundle';
 import Loading from 'components/Loading/Loading';
 
-import Home from 'bundle-loader?lazy&name=home!pages/Home/Home';
-import Page1 from 'bundle-loader?lazy&name=page1!pages/Page1/Page1';
-import Counter from 'bundle-loader?lazy&name=counter!pages/UnCheck/UnCheck';
-import UserInfo from 'bundle-loader?lazy&name=userInfo!pages/UserInfo/UserInfo';
-import NotFound from 'bundle-loader?lazy&name=notFound!pages/NotFound/NotFound';
+import Home from "bundle-loader?lazy&name=home!pages/Home/Home";
+import UnCheck from "bundle-loader?lazy&name=unCheck!pages/UnCheck/UnCheck";
+import Approve from "bundle-loader?lazy&name=approve!pages/Approve/Approve";
+import DocSign from "bundle-loader?lazy&name=docSign!pages/DocSign/DocSign";
+import News from "bundle-loader?lazy&name=news!pages/News/News";
+import Schedule from "bundle-loader?lazy&name=schedule!pages/Schedule/Schedule";
 
 const createComponent = (component) => (props) => (
     <Bundle load={component}>
@@ -18,12 +19,14 @@ const createComponent = (component) => (props) => (
     </Bundle>
 );
 
-export default () => (
+export default (match) => (
     <Switch>
-        <Route exact path="/" component={createComponent(Home)}/>
-        <Route path="/page1" component={createComponent(Page1)}/>
-        <Route path="/counter" component={createComponent(Counter)}/>
-        <Route path="/userinfo" component={createComponent(UserInfo)}/>
-        <Route component={createComponent(NotFound)}/>
+        <Route path={`${match.path}`} exact component={createComponent(Home)} />
+        <Route path={`${match.path}/uncheck`} component={createComponent(UnCheck)} />
+        <Route path={`${match.path}/approve`} component={createComponent(Approve)} />
+        <Route path={`${match.path}/docsign`} component={createComponent(DocSign)} />
+        <Route path={`${match.path}/news`} component={createComponent(News)} />
+        <Route path={`${match.path}/schedule`} component={createComponent(Schedule)} />
+        <Redirect to={`${match.url}`} />
     </Switch>
 );
