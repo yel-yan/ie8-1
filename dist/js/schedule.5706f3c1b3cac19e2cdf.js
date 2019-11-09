@@ -1,5 +1,5 @@
-webpackJsonp([ 6 ], {
-    "524": function(e, t, u) {
+webpackJsonp([ 3 ], {
+    "529": function(e, t, u) {
         "use strict";
         function n(e) {
             return e && e.__esModule ? e : {
@@ -18,7 +18,7 @@ webpackJsonp([ 6 ], {
                 "value": function() {
                     return v["default"].createElement("div", {
                         "className": "page-box"
-                    }, "这个审核页面~");
+                    }, "这个日程管理页面~");
                 }
             } ]), t;
         }(_.Component);

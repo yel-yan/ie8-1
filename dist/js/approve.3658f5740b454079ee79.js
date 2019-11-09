@@ -1,5 +1,5 @@
-webpackJsonp([ 4 ], {
-    "527": function(e, t, u) {
+webpackJsonp([ 6 ], {
+    "525": function(e, t, u) {
         "use strict";
         function n(e) {
             return e && e.__esModule ? e : {
@@ -18,7 +18,7 @@ webpackJsonp([ 4 ], {
                 "value": function() {
                     return v["default"].createElement("div", {
                         "className": "page-box"
-                    }, "这个新闻资讯页面~");
+                    }, "这个审核页面~");
                 }
             } ]), t;
         }(_.Component);

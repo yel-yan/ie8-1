@@ -1,4 +1,4 @@
-webpackJsonp([ 3 ], {
+webpackJsonp([ 4 ], {
     "528": function(e, t, u) {
         "use strict";
         function n(e) {
@@ -18,7 +18,7 @@ webpackJsonp([ 3 ], {
                 "value": function() {
                     return v["default"].createElement("div", {
                         "className": "page-box"
-                    }, "这个日程管理页面~");
+                    }, "这个新闻资讯页面~");
                 }
             } ]), t;
         }(_.Component);
