@@ -17,8 +17,7 @@ commonConfig = {
             'react',
             'react-dom',
             'react-redux',
-            'react-router-dom',
-            'redux-logger'
+            'react-router-dom'
         ],
     },
     output: {
