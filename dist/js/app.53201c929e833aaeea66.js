@@ -28481,9 +28481,9 @@ webpackJsonp([ 7 ], {
         Object.defineProperty(t, "__esModule", {
             "value": !0
         });
-        var o = n(307), i = n(1207), a = r(i), s = (n(1206), n(560)), l = r(s), u = (0, 
-        o.createStore)(l["default"], (0, o.applyMiddleware)(a["default"]));
-        t["default"] = u;
+        var o = n(307), i = n(1207), a = r(i), s = n(1206), l = n(560), u = r(l), c = (0, 
+        s.createLogger)(), p = (0, o.createStore)(u["default"], (0, o.applyMiddleware)(a["default"], c));
+        t["default"] = p;
     },
     "326": function(e, t, n) {
         "use strict";
