@@ -9,6 +9,8 @@ import WCModal from './modals/WCModal'
 import WPModal from './modals/WPModal'
 import GWModal from './modals/GWModal'
 import RCModal from './modals/RCModal'
+import Tab from './tabpane/Tab'
+import Tab_apply from './tabpane/Tab_apply'
 
 export {
   New,
@@ -21,5 +23,7 @@ export {
   JBModal,
   WCModal,
   GWModal,
-  RCModal
+  RCModal,
+  Tab,
+  Tab_apply
 }

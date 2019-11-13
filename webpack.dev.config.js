@@ -1,9 +1,10 @@
 const merge = require('webpack-merge');
 const path = require('path');
+
 const HappyPack = require("happypack");
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const commonConfig = require('./webpack.common.config.js');
 
 const devConfig = {
@@ -15,36 +16,32 @@ const devConfig = {
         loaders: [
             {
                 test: /\.css$/,
-                loader: "happypack/loader?cacheDirectory=true&id=cssm",
+                loaders: ["style-loader", "css-loader", "postcss-loader"]
             },
             {
-				test: /[^_]\.css$/i,
-				loader: "happypack/loader?cacheDirectory=true&id=css",
-			},
-            {
                 test: /\.less$/i,
-                loader: "happypack/loader?cacheDirectory=true&id=less",
+                loaders: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
             },
         ]
     },
     plugins:[
-        new HappyPack({
-            id: "cssm",
-            threads: 4,
-            loaders: ["style-loader", "css-loader", "postcss-loader"],
-        }),
-        new HappyPack({
-            id: "css",
-            threads: 4,
-            loaders: ["style-loader", "css-loader", "postcss-loader"],
-        }),
-        new HappyPack({
-            id: "less",
-            threads: 4,
-            loaders: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
-        }),
-        new FriendlyErrorsPlugin(),
-        new webpack.NamedModulesPlugin(),
+        // new HappyPack({
+        //     id: "cssm",
+        //     threads: 4,
+        //     loaders: ["style-loader", "css-loader", "postcss-loader"],
+        // }),
+        // new HappyPack({
+        //     id: "css",
+        //     threads: 4,
+        //     loaders: ["style-loader", "css-loader", "postcss-loader"],
+        // }),
+        // new HappyPack({
+        //     id: "less",
+        //     threads: 4,
+        //     loaders: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
+        // }),
+        // new FriendlyErrorsPlugin(),
+        // new webpack.NamedModulesPlugin(),
         // new UglifyJSPlugin({
         //     compress: {
         //         properties: false,
@@ -60,11 +57,6 @@ const devConfig = {
         //     sourceMap: false
         // }),
     ],
-    dev: {
-        env: {
-          NODE_ENV: '"development"'
-        }
-    },
     devServer: {
         contentBase: path.join(__dirname, './dist'),
         historyApiFallback: true,

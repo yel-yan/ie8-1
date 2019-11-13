@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon, Breadcrumb, Select, Button, Table } from 'antd'
 import API from 'utils/myAxios'
-import {QJModal,WPModal,JBModal,BXModal,CCModal,RCModal,WCModal} from 'components'
+import {QJModal,WPModal,JBModal,BXModal,CCModal,RCModal,WCModal,GWModal} from 'components'
 import './styles.less'
 
 const component = {
@@ -11,7 +11,8 @@ const component = {
   bx:BXModal,
   cc:CCModal,
   rc:RCModal,
-  wc:WCModal
+  wc:WCModal,
+  gw:GWModal
 }
 
 class Uncheck extends React.Component {
@@ -43,17 +44,16 @@ class Uncheck extends React.Component {
       let newData = data.data.list
       const newList = []
       newData = newData.map((item) => {
-        console.log(item)
         switch (item.Cates) {
-          case 'leave': newList.push(Object.assign(item, { type: 'qj', Cates: '请假' })); break
-          case 'overtime': newList.push(Object.assign(item, { type: 'jb', Cates: '加班' })); break
-          case 'expense': newList.push(Object.assign(item, { type: 'bx', Cates: '报销' })); break
-          case 'businesstrip': newList.push(Object.assign(item, { type: 'cc', Cates: '出差' })); break
-          case 'goout': newList.push(Object.assign(item, { type: 'wc', Cates: '外出' })); break
-          case 'oagoods': newList.push(Object.assign(item, { type: 'wp', Cates: '物品' })); break
+          case 'leave': newList.push({...item, type: 'qj', Cates: '请假' }); break
+          case 'overtime': newList.push({...item, type: 'jb', Cates: '加班' }); break
+          case 'expense': newList.push({...item, type: 'bx', Cates: '报销' }); break
+          case 'businesstrip': newList.push({...item, type: 'cc', Cates: '出差' }); break
+          case 'goout': newList.push({...item, type: 'wc', Cates: '外出' }); break
+          case 'oagoods': newList.push({...item, type: 'wp', Cates: '物品' }); break
+          case 'signing': newList.push({...item, type: 'gw', Cates: '公文' }); break
         }
       })
-      console.log(newList)
       this.setState({ list: newList })
     }).catch((err) => {
       console.log(err)
@@ -71,14 +71,14 @@ class Uncheck extends React.Component {
       let newData = data.data.list
       const newList = []
       newData = newData.map((item) => {
-        console.log(item)
         switch (item.Cates) {
-          case 'leave': newList.push(Object.assign(item, { type: 'qj', Cates: '请假' })); break
-          case 'overtime': newList.push(Object.assign(item, { type: 'jb', Cates: '加班' })); break
-          case 'expense': newList.push(Object.assign(item, { type: 'bx', Cates: '报销' })); break
-          case 'businesstrip': newList.push(Object.assign(item, { type: 'cc', Cates: '出差' })); break
-          case 'goout': newList.push(Object.assign(item, { type: 'wc', Cates: '外出' })); break
-          case 'oagoods': newList.push(Object.assign(item, { type: 'wp', Cates: '物品' })); break
+          case 'leave': newList.push({...item, type: 'qj', Cates: '请假' }); break
+          case 'overtime': newList.push({...item, type: 'jb', Cates: '加班' }); break
+          case 'expense': newList.push({...item, type: 'bx', Cates: '报销' }); break
+          case 'businesstrip': newList.push({...item, type: 'cc', Cates: '出差' }); break
+          case 'goout': newList.push({...item, type: 'wc', Cates: '外出' }); break
+          case 'oagoods': newList.push({...item, type: 'wp', Cates: '物品' }); break
+          case 'signing': newList.push({...item, type: 'gw', Cates: '公文' }); break
         }
       })
       this.setState({ list: newList, total: data.data.count })
@@ -91,15 +91,16 @@ class Uncheck extends React.Component {
     console.log(param.text)
     let url = '',text = param.text;
     switch (text.type) {
-      case 'qj': url = 'api/leaves/approval'; break
-      case 'jb': url = 'api/overtimes/approval'; break
-      case 'bx': url = 'api/expenses/approval'; break
-      case 'cc': url = 'api/businesstrips/approval'; break
-      case 'wc': url = 'api/goouts/approval'; break
-      case 'wp': url = 'api/oagoods/approval'; break
+      case 'qj': url = '/api/leaves/approval'; break
+      case 'jb': url = '/api/overtimes/approval'; break
+      case 'bx': url = '/api/expenses/approval'; break
+      case 'cc': url = '/api/businesstrips/approval'; break
+      case 'wc': url = '/api/goouts/approval'; break
+      case 'wp': url = '/api/oagoods/approval'; break
+      case 'gw': url = '/api/signing/approval';break
     }
     this.index = param.index;
-    API.get(url, { id: text.ApplyId }).then((data) => {
+    API.get(url, {params : { id: text.ApplyId }}).then((data) => {
       this.setState({ total: data.data.length,type:text.type,formData:data.data,visible:true })
     }).catch((err) => {})
   }
@@ -131,11 +132,13 @@ class Uncheck extends React.Component {
     const columns = [
       {
         title: '申请人',
+        width: '200',
         dataIndex: 'Realname',
         render: text => <a>{text}</a>,
       },
       {
         title: '申请类型',
+        width: '150',
         className: 'column-money',
         dataIndex: 'Cates',
       },

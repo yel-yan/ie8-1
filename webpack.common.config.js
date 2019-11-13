@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HappyPack = require("happypack");
+// const HappyPack = require("happypack");
 const webpack = require('webpack');
 const es3ifyPlugin = require('es3ify-webpack-plugin');
 
@@ -36,9 +36,9 @@ commonConfig = {
         loaders: [
             {
                 test: /\.(js|jsx)$/,
-                loader: "happypack/loader?cacheDirectory=true&id=jsx",
+                loaders: ['babel-loader?cacheDirectory=true'],
                 include: [path.resolve(__dirname, './src')],
-                exclude: path => !!path.match(/node_modules|src\/assets/),
+                // exclude: path => !!path.match(/node_modules|src\/assets/),
             },
             {
                 test: /\.(jpe?g|png|gif|bmp|ico)(\?.*)?$/i,
@@ -58,16 +58,16 @@ commonConfig = {
         ]
     },
     plugins: [
-        new HappyPack({
-			id: "jsx",
-			threads: 4,
-			loaders: [{
-				loader: "babel-loader",
-				options: {
-					cacheDirectory: true,
-				},
-			}],
-		}),
+        // new HappyPack({
+		// 	id: "jsx",
+		// 	threads: 4,
+		// 	loaders: [{
+		// 		loader: "babel-loader",
+		// 		options: {
+		// 			cacheDirectory: true,
+		// 		},
+		// 	}],
+		// }),
         new HtmlWebpackPlugin({
             title: "创视天成OA系统",
             filename: 'index.html',

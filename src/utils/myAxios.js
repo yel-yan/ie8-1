@@ -35,8 +35,8 @@ myAxios.interceptors.request.use(config => {
         if (config.data['__isFormType']) {
             config.data = Qs.stringify({...config.data});
         } else{
-            config.data = JSON.stringify(config.data);
-            config.headers['Content-Type'] = 'application/x-www-form-urlencode;charset=utf-8';
+            config.data = Qs.stringify({...config.data});
+            // config.headers['Content-Type'] = 'application/x-www-form-urlencode;charset=utf-8';
         }
     }else if(config.method === 'get'){
         config.data = Qs.stringify({...config.params});

@@ -75,7 +75,7 @@ const QJModal = React.createClass({
             status: status,
             summary : fields.summary
         }
-        API.POST('leaves/approvalto',params).then((data) => {
+        API.post('/api/leaves/approvalto',params).then((data) => {
             console.log('请假审批')
             console.log(data)
             this.props.form.resetFields();
@@ -91,18 +91,6 @@ const QJModal = React.createClass({
     },
     
     handleCancel(){
-        console.log('点击叉叉')
-        let formData = {
-            type: undefined,
-            started: undefined,
-            ended: undefined,
-            days:undefined,
-            reason:undefined,
-            picture:undefined,
-            approverid:[],
-            ccerid:[]
-        };
-        this.setState({formData:formData})
         this.props.form.resetFields();
         this.props.onCancel()
     },
@@ -128,7 +116,7 @@ const QJModal = React.createClass({
         formData.days = fields.days
         formData.reason = fields.reason
         console.log(formData)
-        API.POST('leaves/addto',formData).then((data) => {
+        API.post('/api/leaves/addto',formData).then((data) => {
             console.log('请假审批提交')
             if(data.code == 1){
                 message.success(data.msg);
