@@ -1,12 +1,14 @@
 import React, {Component} from "react";
-import {Col, Row, Form,form, Input, Button, Modal, notification, Icon,message} from 'antd';
+import {Col, Row, Form, Input, Button, Modal, notification, Icon,message} from 'antd';
 import Cookies from 'js-cookie';
-import myAxios from '../../utils/myAxios'
-import { login } from '../../utils/xhr'
-const FormItem = Form.Item;
-const createForm = Form.create;
+import api from 'utils/myAxios'
+import store from 'store'
+import { login } from 'utils/xhr'
 import "./LoginForm.css"
 // import {arrayToTree} from "../../utils/data-tools";
+
+const FormItem = Form.Item;
+const createForm = Form.create;
 
 class LoginForm extends Component {
     constructor(props) {
@@ -17,13 +19,10 @@ class LoginForm extends Component {
     }
 
     componentDidMount() {
-        //提醒框全局默认配置
         notification.config({
             duration: 8,
             top: 100,
         });
-        //刷新验证码
-        // this.handleImgClick();
     }
 
     handleSubmit(e) {
@@ -34,95 +33,38 @@ class LoginForm extends Component {
                 return;
             }
 
-
-            //登录请求逻辑
-            /*//todo submit action
+            console.log(values)
             values['__isFormType'] = true;
-            myAxios.post('./api/v1/login', values)
-                .then((data) => {
-                    Message.success('登录成功！');
+            api.post('/api/user/login', values).then((data) => {
+                console.log(data)
+                let res = data.data;
+                if(data.code == 1){
+                    message.success('登录成功！');
                     // 认证成功，转向index。要设置Cookie，证明非CSRF攻击
                     Cookies.set('_isAuthorised', true);
-                    const token = Cookies.get("CSRFToken");
-                    Cookies.set("CSRFDefense", token);
-
-                    //menuData cookie长度超长了。。。
-                    const userMenu = data['userMenu'];
-                    if (userMenu) {
-                        const formatMenuData = arrayToTree(userMenu, 'id', 'parent_id', 'children');
-                        console.log("formatMenuData", JSON.stringify(formatMenuData).length);
-                        // Cookies.set('__menuData', formatMenuData);
-                    }
-
-                    const userInfo = data['userInfo'];
-                    if (userInfo) {
-                        const userCode = userInfo['userCode'];
-                        //userRoles,userPermissions必须返回Array类型，字母小写
-                        const userRoles = userInfo['userRoles'] ? userInfo['userRoles'] : [];
-                        const userPermissions = userInfo['userPermissions'] ? userInfo['userPermissions'] : [];
-                        const lastLoginInfo = userInfo['lastLoginInfo'];
-
-                        //用户信息保存在window对象中
-                        Cookies.set('__userCode', userCode);
-                        Cookies.set('__userRoles', userRoles);
-                        Cookies.set('__userPermissions', userPermissions);
-                        if (lastLoginInfo != '') {
-                            notification.open({
-                                message: '登录信息',
-                                description: lastLoginInfo,
-                                duration: 8,
-                            })
-                        }
-                    }
-
-                    this.props.onSubmitSuccess();
-                }).catch(error => {
-                    Modal.warning({
-                        title: error
-                    });
-                    this.handleImgClick();
-                }
-            )*/
-
-            //模拟数据
-            const data = {
-                "userInfo": {
-                    "userRoles": ["admin", "user"],
-                    "userPermissions": ["*:*", "role:view", "task:view", "unit:view", "user:view", "log:view", "druid:view", "perm:view", "dict:view", "menu:view", "param:view", "session:view", "code:add", "code:add"],
-                    "lastLoginInfo": "本次登录地址：10.128.170.21 \n 上次登录状态：成功 \n 上次登录地址：10.128.170.21 \n 上次登录时间：2018-12-24 12:04:59",
-                    "userCode": "admin"
-                },
-                "message": "认证通过"
-            };
-            //模拟登录成功的处理
-            message.success('登录成功！');
-            // 认证成功，转向index。要设置Cookie，证明非CSRF攻击
-            Cookies.set('_isAuthorised', true);
-
-            const userInfo = data['userInfo'];
-            if (userInfo) {
-                const userCode = userInfo['userCode'];
-                //userRoles,userPermissions必须返回Array类型，字母小写
-                const userRoles = userInfo['userRoles'] ? userInfo['userRoles'] : [];
-                const userPermissions = userInfo['userPermissions'] ? userInfo['userPermissions'] : [];
-                const lastLoginInfo = userInfo['lastLoginInfo'];
-
-                //用户信息保存在window对象中
-                Cookies.set('__userCode', userCode);
-                Cookies.set('__userRoles', userRoles);
-                Cookies.set('__userPermissions', userPermissions);
-                if (lastLoginInfo != '') {
-                    notification.open({
-                        message: '登录信息',
-                        description: lastLoginInfo,
-                        duration: 8,
+                    Cookies.set('_token',data.data.token);
+                    Cookies.set('userId',data.data.userid)
+                    Cookies.set('nim_accid',data.data.accid)
+                    Cookies.set('nim_token',data.data.acc_token)
+                    console.log("111111111111111111111111111111111111111111111111")
+                    // if(!(platform.name == 'IE' && platform.version == '8.0') ){
+                    // console.log("登录im")
+                    // store.dispatch(loginNIM(res.accid,res.acc_token));
+                    // }
+                    // 浏览器刷新后会清空stores数据
+                    store.dispatch({
+                        type: 'SET_LOGGED_USER',
+                        logged: true
                     })
+                    this.props.onSubmitSuccess();
+                }else{
+                    message.error(data.msg);
                 }
-            }
-            // login().then(() => {
-                this.props.onSubmitSuccess();
-            // })
-            
+            }).catch(error => {
+                Modal.warning({
+                    title: error
+                });
+            }) 
         })
     }
 
@@ -152,22 +94,16 @@ class LoginForm extends Component {
 
     render() {
         const {getFieldProps} = this.props.form;
-        const userNameProps = getFieldProps('loginName', {
+        const userNameProps = getFieldProps('mobile', {
             rules: [
                 {required: true, min: 5, message: '请输入用户名'},
                 // {validator: this.checkUserName.bind(this)}
             ]
         });
-        const passwordProps = getFieldProps('password', {
+        const passwordProps = getFieldProps('user_pwd', {
             rules: [
-                {required: true, min: 5, message: '请输入密码'},
+                {required: true, min: 3, message: '请输入密码'},
                 // {validator: this.checkPassword.bind(this)}
-            ]
-        });
-        const verifyCodeCodeProps = getFieldProps('verifyCode', {
-            rules: [
-                {required: true, message: '必须输入验证码'},
-                // {validator: this.checkValidateCode.bind(this)}
             ]
         });
         const formCommonStyle = {
@@ -198,22 +134,6 @@ class LoginForm extends Component {
                                    size='large' className='login-input'
                                    addonBefore={<i className='fa fa-lock'></i>}
                             />
-                        </FormItem>
-                        <FormItem
-                            /*label='验证码'
-                            labelCol={{span: 4}}*/
-                        >
-                            <Col span='15'>
-                                <FormItem>
-                                    <Input {...verifyCodeCodeProps} onPressEnter={this.handleSubmit.bind(this)}
-                                           size='large' className='login-input'
-                                           addonBefore={<i className='fa fa-barcode'></i>}/>
-                                </FormItem>
-                            </Col>
-                            <Col span='8'>
-                                <img className='login-verify-img' src='./assets/static-img/login/kaptcha.jpg'
-                                     onClick={this.handleImgClick.bind(this)} ref='verifyImg'/>
-                            </Col>
                         </FormItem>
                         <FormItem
                             wrapperCol={{span: 20, offset: 3}}

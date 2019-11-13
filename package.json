@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-build": "cross-env NODE_ENV=development webpack --config webpack.dev.config.js",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --color --progress --hot --public 192.168.1.231",
+    "start": "cross-env NODE_ENV=development --max-old-space-size=8192 webpack-dev-server --config webpack.dev.config.js --color --progress --hot --public 192.168.1.231",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js"
   },
   "keywords": [
@@ -46,11 +46,13 @@
     "es3ify-loader": "^0.2.0",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "^0.11.2",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "happypack": "^5.0.1",
     "html-webpack-plugin": "^2.30.1",
     "postcss-cssnext": "^3.0.2",
     "postcss-loader": "^2.0.6",
-    "redux-logger": "^3.0.6",
     "react-hot-loader": "^3.0.0-beta.7",
+    "redux-logger": "^3.0.6",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.9",
@@ -67,6 +69,7 @@
     "es5-shim": "^4.5.9",
     "es6-promise": "4.1.1",
     "export-from-ie8": "^1.0.5",
+    "fingerprintjs2": "^1.5.1",
     "html5shiv": "3.7.3",
     "jquery": "1.12.4",
     "js-cookie": "2.2.0",
@@ -77,6 +80,7 @@
     "react-dom": "0.14.9",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-signature-canvas": "^1.0.3",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   }

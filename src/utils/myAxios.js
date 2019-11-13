@@ -2,29 +2,44 @@ import axios from 'axios';
 import Qs from 'qs';
 import Cookies from 'js-cookie';
 import {Modal} from 'antd';
+import fingerprintjs2 from 'fingerprintjs2'
+
+let Deviceid;
+
+fingerprintjs2().get(function(result, components){
+    console.log("浏览器指纹",result)
+    Deviceid = result;
+});
 
 const myAxios = axios.create({
     // baseURL:'http://oa-api.1024web.cn/',
     timeout: 10000,
     headers: {'X-Requested-With': 'XMLHttpRequest'},
-    // headers: {'Content-Type': 'application/json;charset=utf-8'},
     headers: {'Content-Type': 'application/x-www-form-urlencode;charset=utf-8'},
+    headers: {'Timestamp' : new Date().getTime()},
 });
+
+myAxios.defaults.headers['ClientSource'] = 'web'
+myAxios.defaults.headers['ClientSystem'] = navigator.userAgent
+myAxios.defaults.headers['Version'] = '1.0'
 
 myAxios.interceptors.request.use(config => {
     console.log('******before config***', config);
-    const token = Cookies.get("CSRFToken");
+    const token = Cookies.get("_token");
     Cookies.set("CSRFDefense", token);
+    config.headers['Deviceid'] = Deviceid;
+    config.headers['Token'] = token;
+    config.headers['Timestamp'] = new Date().getTime();
     if (config.method === 'post' || config.method === 'put') {
-        //后台接受的参数Content-Type
-        // 默认application/x-www-form-urlencode;charset=utf-8,对应spring注解：@RequestParam,又字段__isFormType标明
-        // application/json;对应spring注解：@RequestBody
+        console.log(config.data['__isFormType'])
         if (config.data['__isFormType']) {
             config.data = Qs.stringify({...config.data});
         } else{
             config.data = JSON.stringify(config.data);
-            config.headers['Content-Type'] = 'application/json;charset=utf-8';
+            config.headers['Content-Type'] = 'application/x-www-form-urlencode;charset=utf-8';
         }
+    }else if(config.method === 'get'){
+        config.data = Qs.stringify({...config.params});
     }
     console.log('******axios config***', config);
     return config;

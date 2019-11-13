@@ -4,12 +4,12 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import Bundle from './Bundle';
 import Loading from 'components/Loading/Loading';
 
-import Home from "bundle-loader?lazy&name=home!pages/Home/Home";
-import UnCheck from "bundle-loader?lazy&name=unCheck!pages/UnCheck/UnCheck";
-import Approve from "bundle-loader?lazy&name=approve!pages/Approve/Approve";
-import DocSign from "bundle-loader?lazy&name=docSign!pages/DocSign/DocSign";
-import News from "bundle-loader?lazy&name=news!pages/News/News";
-import Schedule from "bundle-loader?lazy&name=schedule!pages/Schedule/Schedule";
+import Home from "bundle-loader?lazy&name=home!pages/Home";
+import UnCheck from "bundle-loader?lazy&name=unCheck!pages/UnCheck";
+import Approve from "bundle-loader?lazy&name=approve!pages/Approve";
+import DocSign from "bundle-loader?lazy&name=docSign!pages/DocSign";
+import News from "bundle-loader?lazy&name=news!pages/News";
+import Schedule from "bundle-loader?lazy&name=schedule!pages/Schedule";
 
 const createComponent = (component) => (props) => (
     <Bundle load={component}>

@@ -1,8 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HappyPack = require("happypack");
 const webpack = require('webpack');
 const es3ifyPlugin = require('es3ify-webpack-plugin');
+
+const resolve = dir => path.resolve(__dirname, dir);
 
 commonConfig = {
     entry: {
@@ -18,6 +21,7 @@ commonConfig = {
             'react-dom',
             'react-redux',
             'react-router-dom',
+            "media-match",
             'redux-logger'
         ],
     },
@@ -32,9 +36,9 @@ commonConfig = {
         loaders: [
             {
                 test: /\.(js|jsx)$/,
-                loaders: ['babel-loader?cacheDirectory=true'],
+                loader: "happypack/loader?cacheDirectory=true&id=jsx",
                 include: [path.resolve(__dirname, './src')],
-                // exclude: path => !!path.match(/node_modules|src\/assets/),
+                exclude: path => !!path.match(/node_modules|src\/assets/),
             },
             {
                 test: /\.(jpe?g|png|gif|bmp|ico)(\?.*)?$/i,
@@ -54,6 +58,16 @@ commonConfig = {
         ]
     },
     plugins: [
+        new HappyPack({
+			id: "jsx",
+			threads: 4,
+			loaders: [{
+				loader: "babel-loader",
+				options: {
+					cacheDirectory: true,
+				},
+			}],
+		}),
         new HtmlWebpackPlugin({
             title: "创视天成OA系统",
             filename: 'index.html',
@@ -72,6 +86,10 @@ commonConfig = {
         //     name: 'runtime',
         //     minChunks: Infinity,
         // }),
+        // 设置全局变量process.env.NODE_ENV开发模式，cross-env跨平台设置
+        new webpack.DefinePlugin({
+            "process.env.NODE_ENV" : (JSON.stringify(process.env.NODE_ENV))
+        }),
         new CopyWebpackPlugin([
             {
                 from: "src/assets/static",
@@ -83,12 +101,16 @@ commonConfig = {
 
     resolve: {
         alias: {
+            '@': resolve('src'),
             pages: path.join(__dirname, 'src/pages'),
             components: path.join(__dirname, 'src/components'),
             router: path.join(__dirname, 'src/router'),
+            store: path.join(__dirname, 'src/redux/store'),
             actions: path.join(__dirname, 'src/redux/actions'),
-            reducers: path.join(__dirname, 'src/redux/reducers')
-        }
+            reducers: path.join(__dirname, 'src/redux/reducers'),
+            utils:path.join(__dirname,'src/utils')
+        },
+        extensions: ["", ".js", ".jsx", ".json"],
     }
 };
 
