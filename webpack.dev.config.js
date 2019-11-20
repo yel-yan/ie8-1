@@ -21,33 +21,45 @@ const devConfig = {
     module: {
         loaders: [
             {
-                test: /\.css$/,
-                loaders: ["style-loader", "css-loader", "postcss-loader"]
+                test: /_\.css$/i,
+                loader: "happypack/loader?cacheDirectory=true&id=cssm",
+            },
+            {
+                test: /[^_]\.css$/i,
+                loader: "happypack/loader?cacheDirectory=true&id=css",
             },
             {
                 test: /\.less$/i,
-                loaders: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
+                loader: "happypack/loader?cacheDirectory=true&id=less",
             },
+            // {
+            //     test: /\.css$/,
+            //     loaders: ["style-loader", "css-loader", "postcss-loader"]
+            // },
+            // {
+            //     test: /\.less$/i,
+            //     loaders: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
+            // },
         ]
     },
     plugins:[
-        // new HappyPack({
-        //     id: "cssm",
-        //     threads: 4,
-        //     loaders: ["style-loader", "css-loader", "postcss-loader"],
-        // }),
-        // new HappyPack({
-        //     id: "css",
-        //     threads: 4,
-        //     loaders: ["style-loader", "css-loader", "postcss-loader"],
-        // }),
-        // new HappyPack({
-        //     id: "less",
-        //     threads: 4,
-        //     loaders: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
-        // }),
-        // new FriendlyErrorsPlugin(),
-        // new webpack.NamedModulesPlugin(),
+        new HappyPack({
+            id: "cssm",
+            threads: 4,
+            loaders: ["style-loader", "css-loader", "postcss-loader"],
+        }),
+        new HappyPack({
+            id: "css",
+            threads: 4,
+            loaders: ["style-loader", "css-loader", "postcss-loader"],
+        }),
+        new HappyPack({
+            id: "less",
+            threads: 4,
+            loaders: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
+        }),
+        new FriendlyErrorsPlugin(),
+        new webpack.NamedModulesPlugin(),
         // new UglifyJSPlugin({
         //     compress: {
         //         properties: false,

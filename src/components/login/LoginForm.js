@@ -52,10 +52,10 @@ class LoginForm extends Component {
                     // store.dispatch(loginNIM(res.accid,res.acc_token));
                     // }
                     // 浏览器刷新后会清空stores数据
-                    // store.dispatch({
-                    //     type: 'SET_LOGGED_USER',
-                    //     logged: true
-                    // })
+                    store.dispatch({
+                        type: 'SET_LOGGED_USER',
+                        logged: true
+                    })
                     this.props.onSubmitSuccess();
                 }else{
                     message.error(data.msg);
@@ -147,7 +147,7 @@ class LoginForm extends Component {
                                             onClick={this.handleReset.bind(this)}>重&nbsp;&nbsp;置</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
                                 {this.hidePasswordChangeButton ? null :
                                     <Button type='dashed' onClick={this.handleChange.bind(this)}
-                                            className='login-password-button'>修改密码</Button>}
+                                            className='login-password-button'>修改 密码</Button>}
                             </div>
                         </FormItem>
                     </Form>

@@ -23,7 +23,7 @@ const createComponent = (component) => (props) => (
 
 export default (match) => (
     <Switch>
-        <Route path={`${match.path}`}  component={createComponent(Home)} />
+        <Route path={`${match.path}`} exact component={createComponent(Home)} />
         <Route path={`${match.path}/uncheck`} component={createComponent(UnCheck)} />
         <Route path={`${match.path}/approve`} component={createComponent(Approve)} />
         <Route path={`${match.path}/docsign`} component={createComponent(DocSign)} />
