@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 import { Col, Row , Table} from 'antd'
 import { Link } from 'react-router-dom'
-import LineChart from 'components/Echarts/Line-chart'
-import BarChart from 'components/Echarts/Bar-chart'
-import { New,Schedule,Profile } from 'components'
+import { New,Schedule,Profile,LineChart,BarChart } from 'components'
 import api from 'utils/myAxios'
 import axios from 'axios'
 import './Home.less'
 
 export default class Home extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -73,41 +70,36 @@ export default class Home extends Component {
     }
 
     onNewClick = (n) => {
-        this.props.history.push(`/new/${n.Id}`)
-    }
-
-    _handleClick() {
-        this.setState({
-            count: ++this.state.count
-        });
+        this.props.history.push(`app/newdetail/${n.Id}`)
     }
 
     render() {
         const { pendinglist, newslist, schedulelist, userinfo } = this.state;
+        const { match } = this.props;
         const columns = [
             {
-              title: '申请人',
-              dataIndex: 'Realname',
-              render: text => <a>{text}</a>,
+                title: '申请人',
+                dataIndex: 'Realname',
+                render: text => <a>{text}</a>,
             },
             {
-              title: '申请类型',
-              className: 'column-money',
-              dataIndex: 'Cates',
+                title: '申请类型',
+                className: 'column-money',
+                dataIndex: 'Cates',
             },
             {
-              title: '申请理由',
-              dataIndex: 'Reason',
+                title: '申请理由',
+                dataIndex: 'Reason',
             },
             {
-              title: '操作',
-              key: 'operation',
-              width: '100',
-              className: 'column-operation',
-              render: (text, record) => 
-                <span>
-                    <Button type="primary" style={{ marginLeft: '10px' }} onClick={this.handleUpdate.bind(this, text)}>审批</Button>
-                </span>
+                title: '操作',
+                key: 'operation',
+                width: '100',
+                className: 'column-operation',
+                render: (text, record) => 
+                    <span>
+                        <Button type="primary" style={{ marginLeft: '10px' }} onClick={this.handleUpdate.bind(this, text)}>审批</Button>
+                    </span>
             },
         ]
         return (
@@ -121,7 +113,7 @@ export default class Home extends Component {
                             <BarChart />
                         </Col>
                         <Col span="6" className="chart-col">
-                            <Profile userinfo={userinfo}/>
+                            <Profile userinfo={userinfo} match={match}/>
                         </Col>
                     </Row>
                 </div>
@@ -131,7 +123,7 @@ export default class Home extends Component {
                         <div className="card">
                             <div className="card-header">
                                 <i /> 待处理
-                                <span className="more"><Link to="/Uncheck">更多 >></Link></span>
+                                <span className="more"><Link to={`${match.path}/uncheck`}>更多 >></Link></span>
                             </div>
                             <div style={{ background: '#fff', height: 'auto', padding: '0 15px' }}>
                                 <Table
@@ -147,7 +139,8 @@ export default class Home extends Component {
                             <div style={{ height: 'auto' }}>
                                 <div className="card">
                                     <div className="card-header">
-                                        <i></i> 公告动态
+                                        <i></i> 日程管理
+                                        <span className="more"><Link to={`${match.path}/schedule`}>更多 >></Link></span>
                                     </div>
                                     <Schedule schedulelist = {schedulelist}/>
                                 </div>
@@ -155,6 +148,7 @@ export default class Home extends Component {
                                 <div className="card">
                                     <div className="card-header">
                                         <i></i> 新闻资讯
+                                        <span className="more"><Link to={`${match.path}/news`}>更多 >></Link></span>
                                     </div>
                                     <New newlist = {newslist} onNewClick={this.onNewClick}/>
                                 </div>

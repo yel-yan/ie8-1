@@ -1,5 +1,5 @@
 import React from 'react'
-import {DatePicker ,Button} from "antd";
+import { DatePicker, Button } from "antd";
 import echarts from 'echarts'
 import { debounce } from "utils/regfns"
 import api from 'utils/myAxios'
@@ -9,8 +9,8 @@ const RangePicker = DatePicker.RangePicker;
 
 class LineChart extends React.Component {
   state = {
-    start:'',
-    end:''
+    start: '',
+    end: ''
   }
 
   componentDidMount() {
@@ -21,8 +21,8 @@ class LineChart extends React.Component {
   }
 
   handlePull = () => {
-    api.get('/api/user/my_apply_allcount',{params: { start_date:this.state.start,end_date:this.state.end }}).then((data) => {
-      console.log("图表数据",data)
+    api.get('/api/user/my_apply_allcount', { params: { start_date: this.state.start, end_date: this.state.end } }).then((data) => {
+      console.log("图表数据", data)
       // 填入数据
       this.charts.setOption({
         xAxis: {
@@ -40,7 +40,7 @@ class LineChart extends React.Component {
           left: '3%',
           right: '4%',
           bottom: '3%',
-          top:'3%',
+          top: '3%',
           containLabel: true,
         },
         yAxis: {
@@ -71,8 +71,8 @@ class LineChart extends React.Component {
     }, 100)(option)
   }
 
-  onChange = (value)=> {
-      console.log('From: ', value[0], ', to: ', value[1]);
+  onChange = (value) => {
+    console.log('From: ', value[0], ', to: ', value[1]);
   }
 
   render() {
@@ -81,9 +81,9 @@ class LineChart extends React.Component {
         <div className="chart-header">
           <i /> 我发起的审批
         </div>
-        <div style={{padding:'15px'}}>
-          <RangePicker style={{width: 184}} onChange={this.onDateChange} />
-          <Button type="primary" htmlType="submit" style={{marginLeft:'10px'}} onClick={this.handleSearch}>搜索</Button>
+        <div style={{ padding: '15px' }}>
+          <RangePicker style={{ width: 184 }} onChange={this.onDateChange} />
+          <Button type="primary" htmlType="submit" style={{ marginLeft: '10px' }} onClick={this.handleSearch}>搜索</Button>
         </div>
         <div id="charts" style={{ width: '100%', height: '300px' }} />
       </div>

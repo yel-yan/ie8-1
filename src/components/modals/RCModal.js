@@ -1,12 +1,11 @@
 import React from "react";
-import { Form, Select, InputNumber, DatePicker, Switch,
-    Slider, Button, message, Row, Col, Upload, Icon, Modal, Input,Steps } from 'antd';
-const FormItem = Form.Item;
-const Option = Select.Option;
-const Step = Steps.Step;
-const RangePicker = DatePicker.RangePicker;
+import { Form, Select, DatePicker,Button, message, Row, Col, Modal, Input,Steps } from 'antd';
 import {timeStampToStr} from 'utils/common'
 import API from 'utils/myAxios'
+
+const FormItem = Form.Item;
+const RangePicker = DatePicker.RangePicker;
+
 
 const notification = [{id:'-1',value:'无'}, {id:'0',value:'日程开始时'}, {id:'5',value:'提前五分钟'}, {id:'15',value:'提前十五分钟'}, {id:'30',value:'提前三十分钟'}, {id:'60',value:'提前一小时'}, {id:'1440',value:'提前一天'}]
 const repeat = [{id:'0',value:'不重复'}, {id:'1',value:'每天'}, {id:'7',value:'每周'}, {id:'14',value:'每两周'}, {id:'30',value:'每月'}, {id:'365',value:'每年'}]
@@ -48,7 +47,7 @@ const RCModal = React.createClass({
             status: status,
             summary : this.state.summary
         }
-        API.POST('goouts/approvalto',params).then((data) => {
+        API.post('api/goouts/approvalto',params).then((data) => {
             console.log('外出审批')
             console.log(data)
             if(data.code == 1){
@@ -78,7 +77,7 @@ const RCModal = React.createClass({
         formData.remind = fields.remind
         formData.repeat = fields.repeat
         console.log(formData)
-        API.POST('/schedule/do_add',formData).then((data) => {
+        API.post('api/schedule/do_add',formData).then((data) => {
             console.log('日程提交')
             if(data.code == 1){
                 message.success(data.msg);

@@ -10,7 +10,7 @@
     padding: 0;
     margin: 0;
     border: none;
-    font-size: 14px;
+    font-size: 14px !important;
     background-color: #1b579a;
 }
 
@@ -215,5 +215,13 @@
   text-align: center;
   color: #fff;
 }
+.ant-menu-inline > .ant-menu-item,
+.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
+.ant-menu-item-group-list > .ant-menu-item,
+.ant-menu-item-group-list > .ant-menu-submenu > .ant-menu-submenu-title,
+.ant-menu-vertical > .ant-menu-item,
+.ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title {
+  font-size: 14px !important;
+}
 
-/*# sourceMappingURL=app.14d7c.css.map*/
+/*# sourceMappingURL=app.cd128.css.map*/

@@ -9,7 +9,9 @@ import UnCheck from "bundle-loader?lazy&name=unCheck!pages/UnCheck";
 import Approve from "bundle-loader?lazy&name=approve!pages/Approve";
 import DocSign from "bundle-loader?lazy&name=docSign!pages/DocSign";
 import News from "bundle-loader?lazy&name=news!pages/News";
+import NewDetail from "bundle-loader?lazy&name=news!pages/News/NewDetail";
 import Schedule from "bundle-loader?lazy&name=schedule!pages/Schedule";
+import Profile from "bundle-loader?lazy&name=profile!pages/Profile/Profile";
 
 const createComponent = (component) => (props) => (
     <Bundle load={component}>
@@ -21,12 +23,14 @@ const createComponent = (component) => (props) => (
 
 export default (match) => (
     <Switch>
-        <Route path={`${match.path}`} exact component={createComponent(Home)} />
+        <Route path={`${match.path}`}  component={createComponent(Home)} />
         <Route path={`${match.path}/uncheck`} component={createComponent(UnCheck)} />
         <Route path={`${match.path}/approve`} component={createComponent(Approve)} />
         <Route path={`${match.path}/docsign`} component={createComponent(DocSign)} />
-        <Route path={`${match.path}/news`} component={createComponent(News)} />
+        <Route path={`${match.path}/news`} component={createComponent(News)}/>
         <Route path={`${match.path}/schedule`} component={createComponent(Schedule)} />
+        <Route path={`${match.path}/profile`} component={createComponent(Profile)} />
+        <Route path={`${match.path}/newdetail/:newId`}  component={createComponent(NewDetail)} />
         <Redirect to={`${match.url}`} />
     </Switch>
 );

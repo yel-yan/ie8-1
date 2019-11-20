@@ -38,6 +38,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-1": "6.24.1",
     "babel-runtime": "6.26.0",
+    "browser-sync": "^2.26.7",
+    "browser-sync-webpack-plugin": "^2.2.2",
     "bundle-loader": "^0.5.5",
     "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "4.5.1",

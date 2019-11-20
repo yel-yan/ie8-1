@@ -3,7 +3,7 @@ import { Button} from 'antd'
 import { Link } from 'react-router-dom'
 import './styles.less'
 
-const Profile = ({userinfo}) => 
+const Profile = ({userinfo,match}) => 
     <div className="fiche">
         <div className="_box">
             <div className="myinfo">
@@ -35,7 +35,7 @@ const Profile = ({userinfo}) =>
             <div className="position-v">{userinfo.position}</div>
         </div>
         <div className="button">
-            <Link to="/profile1"><Button type="primary" size="large">进入个人中心</Button></Link>
+            <Link to={`${match.path}/profile`}><Button type="primary" size="large">进入个人中心</Button></Link>
         </div>
         </div>
     </div>

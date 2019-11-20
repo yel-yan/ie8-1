@@ -1,6 +1,6 @@
 import React from 'react'
 import echarts from 'echarts'
-import { DatePicker,Button} from 'antd';
+import { DatePicker, Button } from 'antd';
 import api from 'utils/myAxios'
 import './Chart.less'
 
@@ -56,8 +56,8 @@ class BarChart extends React.Component {
   }
 
   handlePull = () => {
-    api.get('/api/user/my_approve_allcount',{params: { start_date:this.state.start,end_date:this.state.end }}).then((data) => {
-      console.log("图表数据",data)
+    api.get('/api/user/my_approve_allcount', { params: { start_date: this.state.start, end_date: this.state.end } }).then((data) => {
+      console.log("图表数据", data)
       // 填入数据
       this.charts.setOption({
         color: ['#3398DB'],
@@ -71,7 +71,7 @@ class BarChart extends React.Component {
           left: '3%',
           right: '4%',
           bottom: '3%',
-          top:'3%',
+          top: '3%',
           containLabel: true,
         },
         xAxis: [
@@ -92,11 +92,11 @@ class BarChart extends React.Component {
         //     data: data.categories
         // },
         series: [{
-            // 根据名字对应到相应的系列
-            name: '数量',
-            type: 'bar',
-            barWidth: '60%',
-            data: data.data
+          // 根据名字对应到相应的系列
+          name: '数量',
+          type: 'bar',
+          barWidth: '60%',
+          data: data.data
         }]
       });
     }).catch((err) => {
@@ -104,7 +104,7 @@ class BarChart extends React.Component {
     })
   }
 
-  onChange = (value)=> {
+  onChange = (value) => {
     console.log('From: ', value[0], ', to: ', value[1]);
   }
 
@@ -112,11 +112,11 @@ class BarChart extends React.Component {
     return (
       <div className="chart-card">
         <div className="chart-header">
-            <i /> 我收到的审批
+          <i /> 我收到的审批
         </div>
-        <div style={{padding:'15px'}}>
-          <RangePicker style={{width: 184}} onChange={this.onDateChange} />
-          <Button type="primary" htmlType="submit" style={{marginLeft:'10px'}} onClick={this.handleSearch}>搜索</Button>
+        <div style={{ padding: '15px' }}>
+          <RangePicker style={{ width: 184 }} onChange={this.onDateChange} />
+          <Button type="primary" htmlType="submit" style={{ marginLeft: '10px' }} onClick={this.handleSearch}>搜索</Button>
         </div>
         <div id="charts2" style={{ width: '100%', height: '300px', background: '#fff' }} />
       </div>

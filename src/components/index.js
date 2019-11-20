@@ -11,6 +11,8 @@ import GWModal from './modals/GWModal'
 import RCModal from './modals/RCModal'
 import Tab from './tabpane/Tab'
 import Tab_apply from './tabpane/Tab_apply'
+import LineChart from './Echarts/Line-chart'
+import BarChart from './Echarts/Bar-chart'
 
 export {
   New,
@@ -25,5 +27,7 @@ export {
   GWModal,
   RCModal,
   Tab,
-  Tab_apply
+  Tab_apply,
+  LineChart,
+  BarChart
 }

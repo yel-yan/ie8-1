@@ -8,7 +8,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const commonConfig = require('./webpack.common.config.js');
 
 const publicConfig = {
-    devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
     module: {
         loaders: [
             {   test: /\.css$/,

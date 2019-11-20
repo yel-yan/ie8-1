@@ -21,8 +21,7 @@ commonConfig = {
             'react-dom',
             'react-redux',
             'react-router-dom',
-            "media-match",
-            'redux-logger'
+            "media-match"
         ],
     },
     output: {
@@ -110,7 +109,7 @@ commonConfig = {
             reducers: path.join(__dirname, 'src/redux/reducers'),
             utils:path.join(__dirname,'src/utils')
         },
-        extensions: ["", ".js", ".jsx", ".json"],
+        // extensions: ["", ".js", ".jsx", ".json"],
     }
 };
 

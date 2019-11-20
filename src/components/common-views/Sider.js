@@ -54,7 +54,6 @@ class Sider extends Component {
                         <Menu.Item key="11"><NavLink to="/app/docsign" activeClassName="active">公文签批</NavLink></Menu.Item>
                         <Menu.Item key="12"><NavLink to="/app/schedule" activeClassName="active">日程管理</NavLink></Menu.Item>
                         <Menu.Item key="13"><NavLink to="/app/news" activeClassName="active">新闻资讯</NavLink></Menu.Item>
-                        <Menu.Item key="14"><NavLink to="/app/inbox" activeClassName="active">测试</NavLink></Menu.Item>
                     </SubMenu>
                 </Menu>
             </div>

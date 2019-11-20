@@ -52,10 +52,10 @@ class LoginForm extends Component {
                     // store.dispatch(loginNIM(res.accid,res.acc_token));
                     // }
                     // 浏览器刷新后会清空stores数据
-                    store.dispatch({
-                        type: 'SET_LOGGED_USER',
-                        logged: true
-                    })
+                    // store.dispatch({
+                    //     type: 'SET_LOGGED_USER',
+                    //     logged: true
+                    // })
                     this.props.onSubmitSuccess();
                 }else{
                     message.error(data.msg);
