@@ -64,7 +64,7 @@
   },
   "dependencies": {
     "antd": "1.11.6",
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "babel-polyfill": "6.26.0",
     "echarts": "4.2.1",
     "es3ify-webpack-plugin": "^0.1.0",
